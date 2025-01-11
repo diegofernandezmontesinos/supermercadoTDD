@@ -15,6 +15,12 @@ const AddToCar = () => {
         setTotalPrice((prev)=> prev + producto.precio)
     }
 
+    const removeFromCar = (index) => {
+      const producto = productsAddedToCar[index]
+      setProductsAddedToCar((prev) => prev.filter((_, i) => i !== index));
+      setTotalPrice((prevTotal) => prevTotal - producto.precio);
+    }
+
   return (
     <>
       <div>
@@ -27,6 +33,12 @@ const AddToCar = () => {
             </li>
           ))}
         </ul>
+        {productos.map((producto, index) => (
+            <li key={producto.id}>
+              {producto.nombre} - Precio: {producto.precio}€
+              <button onClick={() => removeFromCar(index)}>Eliminar del carrito</button>
+            </li>
+          ))}
 
         <h2>Shopping Car</h2>
         <ul>
